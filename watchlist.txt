@@ -1,0 +1,25 @@
+# ==============================================================================
+# ZOZNAM HĽADANÝCH POZÍCIÍ (Kľúčové slová pre Profesia.sk, Karriere.at, Jobs.at, LinkedIn)
+# Riadky začínajúce znakom # sú komentáre a scraper ich ignoruje.
+# Môžeš sem kedykoľvek pridať alebo vymazať ľubovoľnú pozíciu.
+# ==============================================================================
+
+# 1. Supplier & Vendor Performance Management (Hlavný fokus)
+Vendor Manager
+Supplier Manager
+Supplier Performance Manager
+Vendor Performance Manager
+Partner Manager
+Supplier Relationship Manager
+
+# 2. Cost Optimization, OPEX & Finančné analýzy / FinOps
+Cost Optimization Manager
+OPEX Manager
+IT Financial Manager
+FinOps Manager
+Commercial Analyst
+
+# 3. Vendor Strategy, Governance & Sourcing Support
+Vendor Governance Manager
+Service Delivery Manager
+Contract Manager
