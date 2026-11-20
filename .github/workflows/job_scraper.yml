@@ -1,0 +1,43 @@
+name: Career Job AI Scraper (SK & AT + LinkedIn)
+
+on:
+  schedule:
+    # Spúšťa sa automaticky každé 3 hodiny (07:30, 10:30, 13:30, 16:30, 19:30, 22:30 UTC)
+    - cron: '30 */3 * * *'
+  workflow_dispatch: # Umožňuje okamžité manuálne spustenie tlačidlom "Run workflow" na GitHube
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-jobs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Stiahnutie repozitára
+        uses: actions/checkout@v4
+
+      - name: Nastavenie Pythonu
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Inštalácia knižníc
+        run: |
+          pip install -r requirements.txt
+
+      - name: Spustenie kariérneho scrapera
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scraper.py
+
+      - name: Uloženie nájdených pozícií a histórie späť do GitHubu
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add seen_jobs.txt najdene_pozicie.csv || true
+          git diff --staged --quiet || git commit -m "Aktualizácia pracovných ponúk [skip ci]"
+          git push
